@@ -1,0 +1,29 @@
+rows, columns = [int(el) for el in input().split()]
+matrix = [input().split() for _ in range(rows)]
+
+def is_int(s):
+    return s.lstrip('-').isdigit() and s != '-'
+
+while True:
+    line = input()
+    if line == 'END':
+        break
+    command = line.split()
+    if len(command) != 5 or command[0] != 'swap':
+        print('Invalid input!')
+        continue
+    if not all(is_int(x) for x in command[1:]):
+        print('Invalid input!')
+        continue
+    row1, column1, row2, column2 = [int(el) for el in command[1:]]
+    if (
+        row1 < 0 or row1 >= rows or
+        row2 < 0 or row2 >= rows or
+        column1 < 0 or column1 >= columns or
+        column2 < 0 or column2 >= columns
+    ):
+        print('Invalid input!')
+        continue
+    matrix[row1][column1], matrix[row2][column2] = matrix[row2][column2], matrix[row1][column1]
+    for r in matrix:
+        print(' '.join(r))
