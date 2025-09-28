@@ -1,0 +1,51 @@
+n = int(input())
+
+matrix = []
+alice_r = 0
+alice_c = 0
+
+for r in range(n):
+    row = input().split()
+    matrix.append(row)
+    for c in range(n):
+        if row[c] == "A":
+            alice_r, alice_c = r, c
+
+matrix[alice_r][alice_c] = "*"
+collected = 0
+
+while True:
+    command = input()
+    if command == "up":
+        dr, dc = -1, 0
+    elif command == "down":
+        dr, dc = 1, 0
+    elif command == "left":
+        dr, dc = 0, -1
+    else:
+        dr, dc = 0, 1
+
+    alice_r += dr
+    alice_c += dc
+
+    if not (0 <= alice_r < n and 0 <= alice_c < n):
+        print("Alice didn't make it to the tea party.")
+        break
+
+    current = matrix[alice_r][alice_c]
+    if current == "R":
+        matrix[alice_r][alice_c] = "*"
+        print("Alice didn't make it to the tea party.")
+        break
+
+    if current.isdigit():
+        collected += int(current)
+
+    matrix[alice_r][alice_c] = "*"
+
+    if collected >= 10:
+        print("She did it! She went to the party.")
+        break
+
+for row in matrix:
+    print(" ".join(row))
