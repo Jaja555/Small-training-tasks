@@ -1,0 +1,23 @@
+price_rating = list(map(int, input().split(', ')))
+entry_point = int(input())
+type_of_item = input()
+
+left_sum = 0
+right_sum = 0
+
+for index in range(entry_point):
+    if type_of_item == 'cheap' and price_rating[index] < price_rating[entry_point]:
+        left_sum += price_rating[index]
+    elif type_of_item == 'expensive' and price_rating[index] >= price_rating[entry_point]:
+        left_sum += price_rating[index]
+
+for index in range(entry_point + 1, len(price_rating)):
+    if type_of_item == 'cheap' and price_rating[index] < price_rating[entry_point]:
+        right_sum += price_rating[index]
+    elif type_of_item == 'expensive' and price_rating[index] >= price_rating[entry_point]:
+        right_sum += price_rating[index]
+
+if right_sum > left_sum:
+    print(f"Right - {right_sum}")
+elif left_sum >= right_sum:
+    print(f"Left - {left_sum}")
