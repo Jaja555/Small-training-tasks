@@ -1,0 +1,13 @@
+name_of_aviocompany = input()
+number_of_tickets_adults = int(input())
+number_of_tickets_kids = int(input())
+net_price_one_adult_ticket = float(input())
+tax_service = float(input())
+net_price_one_ticket_kid = net_price_one_adult_ticket * 0.30
+adult_ticket = net_price_one_adult_ticket + tax_service
+kid_ticket = net_price_one_ticket_kid + tax_service
+total_sum = number_of_tickets_adults * adult_ticket \
+            + kid_ticket * number_of_tickets_kids
+profit = total_sum * 0.2
+
+print(f'The profit of your agency from {name_of_aviocompany} tickets is {profit:.2f} lv.')
