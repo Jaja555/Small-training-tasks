@@ -1,0 +1,32 @@
+guests = {}
+unliked_meals_count = 0
+command = input()
+while not command == "Stop":
+
+    command_parts = command.split('-')
+    action = command_parts[0]
+    guest = command_parts[1]
+    meal = command_parts[2]
+
+    if action == "Like":
+        if guest not in guests:
+            guests[guest] = []
+        if meal not in guests[guest]:
+            guests[guest].append(meal)
+
+    elif action == "Dislike":
+        if guest not in guests:
+            print(f"{guest} is not at the party.")
+        elif meal not in guests[guest]:
+            print(f"{guest} doesn't have the {meal} in his/her collection.")
+        else:
+            guests[guest].remove(meal)
+            unliked_meals_count += 1
+            print(f"{guest} doesn't like the {meal}.")
+    command = input()
+
+for guest, meals in guests.items():
+    meals_list = ', '.join(meals)
+    print(f"{guest}: {meals_list}")
+
+print(f"Unliked meals: {unliked_meals_count}")
