@@ -1,0 +1,48 @@
+message = input().strip()
+command = input().strip()
+
+while not command == "Finish":
+    parts = command.split()
+    action = parts[0]
+
+    if action == "Replace":
+        current_character = parts[1]
+        new_character = parts[2]
+        message = message.replace(current_character, new_character)
+        print(message)
+
+    elif action == "Cut":
+        start_index = int(parts[1])
+        end_index = int(parts[2])
+        if (0 <= start_index < len(message) and 0 <= end_index < len(message) \
+                and start_index <= end_index):
+            message = message[:start_index] + message[end_index + 1:]
+            print(message)
+        else:
+            print("Invalid indices!")
+
+    elif action == "Make":
+        case = parts[1]
+        if case == "Upper":
+            message = message.upper()
+        elif case == "Lower":
+            message = message.lower()
+        print(message)
+
+    elif action == "Check":
+        substring = parts[1]
+        if substring in message:
+            print(f"Message contains {substring}")
+        else:
+            print(f"Message doesn't contain {substring}")
+
+    elif action == "Sum":
+        start_index = int(parts[1])
+        end_index = int(parts[2])
+        if 0 <= start_index < len(message) and 0 <= end_index < len(message) and start_index <= end_index:
+            substring = message[start_index:end_index + 1]
+            ascii_sum = sum(ord(character) for character in substring)
+            print(ascii_sum)
+        else:
+            print("Invalid indices!")
+    command = input().strip()
