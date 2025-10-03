@@ -1,0 +1,25 @@
+juniors_number = int(input())
+seniors_number = int(input())
+type_of_route = input()
+juniors_price = 0
+seniors_price = 0
+total_people = juniors_number + seniors_number
+total_sum = 0
+if type_of_route == 'trail':
+    juniors_price = 5.50
+    seniors_price = 7
+elif type_of_route == 'cross-country':
+    juniors_price = 8
+    seniors_price = 9.50
+    if total_people >= 50:
+        juniors_price *= 0.75
+        seniors_price *= 0.75
+elif type_of_route == 'downhill':
+    juniors_price = 12.25
+    seniors_price = 13.75
+elif type_of_route == 'road':
+    juniors_price = 20
+    seniors_price = 21.50
+total_sum = (juniors_price * juniors_number
+             + seniors_price * seniors_number) * 0.95
+print(f'{total_sum:.2f}')
