@@ -1,0 +1,54 @@
+class MoneyNotEnoughError(Exception):
+    pass
+
+
+class PINCodeError(Exception):
+    pass
+
+
+class UnderageTransactionError(Exception):
+    pass
+
+
+class MoneyIsNegativeError(Exception):
+    pass
+
+
+first_line = input().split(", ")
+pin_code = first_line[0]
+balance = float(first_line[1])
+age = int(first_line[2])
+
+while True:
+    line = input()
+    if line == "End":
+        break
+
+    parts = line.split("#")
+    command = parts[0]
+
+    if command == "Send Money":
+        money = float(parts[1])
+        given_pin = parts[2]
+
+        if money > balance:
+            raise MoneyNotEnoughError("Insufficient funds for the requested transaction")
+
+        if given_pin != pin_code:
+            raise PINCodeError("Invalid PIN code")
+
+        if age < 18:
+            raise UnderageTransactionError("You must be 18 years or older to perform online transactions")
+
+        balance -= money
+        print(f"Successfully sent {money:.2f} money to a friend")
+        print(f"There is {balance:.2f} money left in the bank account")
+
+    elif command == "Receive Money":
+        money = float(parts[1])
+        if money < 0:
+            raise MoneyIsNegativeError("The amount of money cannot be a negative number")
+
+        to_bank = money / 2
+        balance += to_bank
+        print(f"{to_bank:.2f} money went straight into the bank account")
